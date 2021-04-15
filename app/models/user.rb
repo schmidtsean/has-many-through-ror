@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class User < ActiveRecord::Base
   extend Devise::Models
   # Include default devise modules. Others available are:
@@ -7,4 +6,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+  has_many :dpls, dependent: :destroy
+  has_many :simons, through: :dpls
 end
